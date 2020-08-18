@@ -20,29 +20,16 @@
 
 <script>
 import TodoItem from "@/components/TodoItem";
-import { v4 as uuidv4 } from "uuid";
 export default {
   name: "TodoList",
+  computed: {
+    todos() {
+      return this.$store.getters.getTodos;
+    }
+  },
   data() {
     return {
       inputText: "",
-      todos: [
-        {
-          id: 0,
-          name: "Go to the gym",
-          complete: false
-        },
-        {
-          id: 1,
-          name: "Walk the dog",
-          complete: false
-        },
-        {
-          id: 2,
-          name: "Get some pizza",
-          complete: false
-        }
-      ]
     };
   },
   components: {
@@ -51,17 +38,15 @@ export default {
   methods: {
     addTodo() {
       if (this.inputText != "") {
-        let randomId = uuidv4();
-        let newTodo = { id: randomId, name: this.inputText, complete: false };
-        this.todos.push(newTodo);
+        this.$store.dispatch("addTodo", this.inputText);
+        console.log(this.$store.getTodos);
         this.inputText = "";
       } else {
         alert("Please write a todo text!");
       }
     },
     deleteTodo(todo) {
-      var index = this.todos.indexOf(todo);
-      this.todos.splice(index, 1);
+      this.$store.dispatch("deleteTodo", todo);
     }
   }
 };

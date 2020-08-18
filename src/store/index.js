@@ -1,19 +1,27 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import { v4 as uuidv4 } from "uuid";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    todos: []
+    todos: [
+      {
+        "id": 1,
+        "name": "Walk the dog",
+        "complete": false,
+      }
+    ]
   },
   getters: {
     getTodos: state => state.todos
   },
   mutations: {
-    addTodo: (state, id, text) => {
+    addTodo: (state, text) => {
+      let randomId = uuidv4();
       const newTodo = {
-        id: id,
+        id: randomId,
         name: text,
         complete: false
       };
