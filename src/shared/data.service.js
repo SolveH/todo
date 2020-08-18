@@ -30,6 +30,16 @@ const addTodo = async function(todo) {
     return null;
   }
 };
+const deleteTodo = async function(todo) {
+  try {
+    const res = await axios.delete(`http://localhost:8888/todos/${todo.id}`);
+    parseItem(res, 200);
+    return todo.id;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+};
 
 //Parse response functions
 
@@ -56,4 +66,5 @@ export const dataService = {
   getTodos,
   getTodo,
   addTodo,
+  deleteTodo,
 };

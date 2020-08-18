@@ -19,9 +19,8 @@ export default new Vuex.Store({
     addTodo: (state, addedTodo) => {
       state.todos.push(addedTodo);
     },
-    deleteTodo: (state, todo) => {
-      var index = state.todos.indexOf(todo);
-      state.todos.splice(index, 1);
+    deleteTodo: (state, removedTodoId) => {
+      state.todos.splice(removedTodoId, 1);
     },
   },
   actions: {
@@ -33,8 +32,9 @@ export default new Vuex.Store({
       const addedTodo = await dataService.addTodo(newTodo);
       context.commit("addTodo", addedTodo);
     },
-    deleteTodo: (context, todo) => {
-      context.commit("deleteTodo", todo);
+    async deleteTodo(context, todo) {
+      const removedTodoId = await dataService.deleteTodo(todo);
+      context.commit("deleteTodo", removedTodoId);
     },
   },
   modules: {},
