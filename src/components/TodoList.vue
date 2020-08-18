@@ -16,28 +16,14 @@
 <script>
 import TodoItem from "@/components/TodoItem";
 import { v4 as uuidv4 } from "uuid";
+import { dataService } from "../shared/data.service";
+
 export default {
   name: "TodoList",
   data() {
     return {
       inputText: "",
-      todos: [
-        {
-          id: 0,
-          name: "Go to the gym",
-          complete: false,
-        },
-        {
-          id: 1,
-          name: "Walk the dog",
-          complete: false,
-        },
-        {
-          id: 2,
-          name: "Get some pizza",
-          complete: false,
-        },
-      ],
+      todos: [],
     };
   },
   components: {
@@ -54,6 +40,9 @@ export default {
         alert("Please write a todo text!");
       }
     },
+  },
+  async created() {
+    this.todos = await dataService.getTodos();
   },
 };
 </script>
