@@ -58,8 +58,8 @@ export default {
       }
     },
     deleteTodo(todo){
-      var i = this.todos.indexOf(todo);
-      this.todos.splice(i, 1);
+      var index = this.todos.indexOf(todo);
+      this.todos.splice(index, 1);
     }
   },
 };
