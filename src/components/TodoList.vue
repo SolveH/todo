@@ -47,7 +47,6 @@ export default {
           complete: false,
         };
         this.$store.dispatch("addTodo", newTodo);
-        console.log(this.$store.getTodos);
         this.inputText = "";
       } else {
         alert("Please write a todo text!");
