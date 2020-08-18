@@ -2,7 +2,7 @@
   <div>
     <md-card>
       <md-card-header>
-        <div class="md-title">{{todo.name}}</div>
+        <div class="md-title">{{ todo.name }}</div>
       </md-card-header>
       <md-card-actions>
         <md-button @click="emitDeleteTodo">Delete</md-button>
@@ -23,8 +23,8 @@ export default {
     }
   },
   methods: {
-    emitDeleteTodo(){
-      this.$emit('deleteTodoById', this.todo);
+    emitDeleteTodo() {
+      this.$emit("deleteTodoById", this.todo);
     }
   }
 };

@@ -1,7 +1,9 @@
 <template>
   <div>
-    <TodoItem 
-      v-for="todo in todos" :key="todo.id" :todo="todo"
+    <TodoItem
+      v-for="todo in todos"
+      :key="todo.id"
+      :todo="todo"
       @deleteTodoById="deleteTodo"
     />
     <input
@@ -28,23 +30,23 @@ export default {
         {
           id: 0,
           name: "Go to the gym",
-          complete: false,
+          complete: false
         },
         {
           id: 1,
           name: "Walk the dog",
-          complete: false,
+          complete: false
         },
         {
           id: 2,
           name: "Get some pizza",
-          complete: false,
-        },
-      ],
+          complete: false
+        }
+      ]
     };
   },
   components: {
-    TodoItem,
+    TodoItem
   },
   methods: {
     addTodo() {
@@ -57,10 +59,10 @@ export default {
         alert("Please write a todo text!");
       }
     },
-    deleteTodo(todo){
+    deleteTodo(todo) {
       var index = this.todos.indexOf(todo);
       this.todos.splice(index, 1);
     }
-  },
+  }
 };
 </script>
