@@ -7,7 +7,9 @@
       v-model="inputText"
       v-on:keyup.enter="addTodo"
     />
-    <md-button @click="addTodo"></md-button>
+    <md-button class="md-raised md-primary" @click="addTodo"
+      >Add todo</md-button
+    >
   </div>
 </template>
 
@@ -43,9 +45,13 @@ export default {
   },
   methods: {
     addTodo() {
-      let randomId = uuidv4();
-      let newTodo = { id: randomId, name: this.inputText, complete: false };
-      this.todos.push(newTodo);
+      if (this.inputText != "") {
+        let randomId = uuidv4();
+        let newTodo = { id: randomId, name: this.inputText, complete: false };
+        this.todos.push(newTodo);
+      } else {
+        alert("Please write a todo text!");
+      }
     },
   },
 };
