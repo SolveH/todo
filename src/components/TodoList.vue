@@ -1,6 +1,9 @@
 <template>
   <div>
-    <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" />
+    <TodoItem 
+      v-for="todo in todos" :key="todo.id" :todo="todo"
+      @deleteTodoById="deleteTodo"
+    />
     <input
       type="text"
       name="todoText"
@@ -54,6 +57,10 @@ export default {
         alert("Please write a todo text!");
       }
     },
+    deleteTodo(todo){
+      var i = this.todos.indexOf(todo);
+      this.todos.splice(i, 1);
+    }
   },
 };
 </script>
