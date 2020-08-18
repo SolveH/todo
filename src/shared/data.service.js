@@ -20,10 +20,20 @@ const getTodo = async function(id) {
     return null;
   }
 };
+const addTodo = async function(todo) {
+  try {
+    const res = await axios.post("http://localhost:8888/todos/", todo);
+    const addedTodo = parseItem(res, 201);
+    return addedTodo;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+};
 
 //Parse response functions
 
-const parseList = response => {
+const parseList = (response) => {
   if (response.status !== 200) throw Error(response.message);
   if (!response.data) return [];
   let list = response.data;
@@ -44,5 +54,6 @@ const parseItem = (response, code) => {
 
 export const dataService = {
   getTodos,
-  getTodo
+  getTodo,
+  addTodo,
 };

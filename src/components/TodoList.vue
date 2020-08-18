@@ -20,6 +20,7 @@
 
 <script>
 import TodoItem from "@/components/TodoItem";
+import { v4 as uuidv4 } from "uuid";
 
 export default {
   name: "TodoList",
@@ -39,7 +40,13 @@ export default {
   methods: {
     addTodo() {
       if (this.inputText != "") {
-        this.$store.dispatch("addTodo", this.inputText);
+        let randomId = uuidv4();
+        const newTodo = {
+          id: randomId,
+          name: this.inputText,
+          complete: false,
+        };
+        this.$store.dispatch("addTodo", newTodo);
         console.log(this.$store.getTodos);
         this.inputText = "";
       } else {
