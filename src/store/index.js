@@ -20,7 +20,9 @@ export default new Vuex.Store({
       state.todos.push(addedTodo);
     },
     deleteTodo: (state, removedTodoId) => {
-      state.todos.splice(removedTodoId, 1);
+      state.todos = [
+        ...state.todos.filter((todo) => todo.id !== removedTodoId),
+      ];
     },
   },
   actions: {
