@@ -49,6 +49,7 @@ export default {
         let randomId = uuidv4();
         let newTodo = { id: randomId, name: this.inputText, complete: false };
         this.todos.push(newTodo);
+        this.inputText = "";
       } else {
         alert("Please write a todo text!");
       }
