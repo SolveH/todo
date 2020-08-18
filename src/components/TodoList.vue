@@ -40,9 +40,12 @@ export default {
         alert("Please write a todo text!");
       }
     },
+    async loadTodos() {
+      this.todos = await dataService.getTodos();
+    },
   },
   async created() {
-    this.todos = await dataService.getTodos();
+    await this.loadTodos();
   },
 };
 </script>
