@@ -2,12 +2,12 @@
   <div>
     <md-card>
       <md-card-header>
-        <div class="md-title">{{todo.name}}</div>
+        <div class="md-title">{{ todo.name }}</div>
       </md-card-header>
       <md-card-actions>
-        <!--<md-button>Delete</md-button>
-        <md-button>Edit</md-button>
-        <md-checkbox>Complete</md-checkbox>-->
+        <md-button @click="emitDeleteTodo">Delete</md-button>
+        <!-- <md-button>Edit</md-button> -->
+        <!-- <md-checkbox>Complete</md-checkbox> -->
       </md-card-actions>
     </md-card>
   </div>
@@ -20,6 +20,11 @@ export default {
     todo: {
       Object: String,
       default: () => {}
+    }
+  },
+  methods: {
+    emitDeleteTodo() {
+      this.$emit("deleteTodoById", this.todo);
     }
   }
 };

@@ -1,6 +1,11 @@
 <template>
   <div>
-    <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" />
+    <TodoItem
+      v-for="todo in todos"
+      :key="todo.id"
+      :todo="todo"
+      @deleteTodoById="deleteTodo"
+    />
     <input
       type="text"
       name="todoText"
@@ -15,15 +20,17 @@
 
 <script>
 import TodoItem from "@/components/TodoItem";
-import { v4 as uuidv4 } from "uuid";
-import { dataService } from "../shared/data.service";
 
 export default {
   name: "TodoList",
+  computed: {
+    todos() {
+      return this.$store.getters.getTodos;
+    },
+  },
   data() {
     return {
       inputText: "",
-      todos: [],
     };
   },
   components: {
@@ -32,16 +39,18 @@ export default {
   methods: {
     addTodo() {
       if (this.inputText != "") {
-        let randomId = uuidv4();
-        let newTodo = { id: randomId, name: this.inputText, complete: false };
-        this.todos.push(newTodo);
+        this.$store.dispatch("addTodo", this.inputText);
+        console.log(this.$store.getTodos);
         this.inputText = "";
       } else {
         alert("Please write a todo text!");
       }
     },
     async loadTodos() {
-      this.todos = await dataService.getTodos();
+      await this.$store.dispatch("getTodos");
+    },
+    deleteTodo(todo) {
+      this.$store.dispatch("deleteTodo", todo);
     },
   },
   async created() {

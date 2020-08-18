@@ -23,7 +23,7 @@ const getTodo = async function(id) {
 
 //Parse response functions
 
-const parseList = (response) => {
+const parseList = response => {
   if (response.status !== 200) throw Error(response.message);
   if (!response.data) return [];
   let list = response.data;
@@ -44,5 +44,5 @@ const parseItem = (response, code) => {
 
 export const dataService = {
   getTodos,
-  getTodo,
+  getTodo
 };
