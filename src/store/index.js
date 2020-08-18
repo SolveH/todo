@@ -8,9 +8,9 @@ export default new Vuex.Store({
   state: {
     todos: [
       {
-        "id": 1,
-        "name": "Walk the dog",
-        "complete": false,
+        id: 1,
+        name: "Walk the dog",
+        complete: false
       }
     ]
   },
