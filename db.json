@@ -1,18 +1,8 @@
 {
   "todos": [
     {
-      "id": 0,
-      "name": "Go to the gym",
-      "complete": false
-    },
-    {
-      "id": 1,
-      "name": "Walk the dog",
-      "complete": false
-    },
-    {
-      "id": 2,
-      "name": "Get some pizza",
+      "id": "b0bb5797-0818-41d0-96b2-8654dbacfb67",
+      "name": "hahahahha",
       "complete": false
     }
   ]

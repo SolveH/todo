@@ -1,6 +1,11 @@
 <template>
   <div>
-    <TodoItem v-for="todo in todos" :key="todo.id" :todo="todo" />
+    <TodoItem
+      v-for="todo in todos"
+      :key="todo.id"
+      :todo="todo"
+      @deleteTodoById="deleteTodo"
+    />
     <input
       type="text"
       name="todoText"
@@ -16,28 +21,17 @@
 <script>
 import TodoItem from "@/components/TodoItem";
 import { v4 as uuidv4 } from "uuid";
+
 export default {
   name: "TodoList",
+  computed: {
+    todos() {
+      return this.$store.getters.getTodos;
+    },
+  },
   data() {
     return {
       inputText: "",
-      todos: [
-        {
-          id: 0,
-          name: "Go to the gym",
-          complete: false,
-        },
-        {
-          id: 1,
-          name: "Walk the dog",
-          complete: false,
-        },
-        {
-          id: 2,
-          name: "Get some pizza",
-          complete: false,
-        },
-      ],
     };
   },
   components: {
@@ -47,13 +41,26 @@ export default {
     addTodo() {
       if (this.inputText != "") {
         let randomId = uuidv4();
-        let newTodo = { id: randomId, name: this.inputText, complete: false };
-        this.todos.push(newTodo);
+        const newTodo = {
+          id: randomId,
+          name: this.inputText,
+          complete: false,
+        };
+        this.$store.dispatch("addTodo", newTodo);
         this.inputText = "";
       } else {
         alert("Please write a todo text!");
       }
     },
+    async loadTodos() {
+      await this.$store.dispatch("getTodos");
+    },
+    deleteTodo(todo) {
+      this.$store.dispatch("deleteTodo", todo);
+    },
+  },
+  async created() {
+    await this.loadTodos();
   },
 };
 </script>
