@@ -41,6 +41,17 @@ const deleteTodo = async function(todo) {
   }
 };
 
+const editTodo = async function(todo) {
+  try {
+    const res = await axios.put(`http://localhost:8888/todos/${todo.id}`, todo);
+    const editedTodo = parseItem(res, 200);
+    return editedTodo;
+  } catch (e) {
+    console.log(e);
+    return null;
+  }
+};
+
 //Parse response functions
 
 const parseList = (response) => {
@@ -67,4 +78,5 @@ export const dataService = {
   getTodo,
   addTodo,
   deleteTodo,
+  editTodo,
 };

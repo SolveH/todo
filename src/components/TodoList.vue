@@ -5,6 +5,7 @@
       :key="todo.id"
       :todo="todo"
       @deleteTodoById="deleteTodo"
+      @editTodoById="editTodo"
     />
     <input
       type="text"
@@ -44,6 +45,7 @@ export default {
         const newTodo = {
           id: randomId,
           name: this.inputText,
+          editing: false,
           complete: false,
         };
         this.$store.dispatch("addTodo", newTodo);
@@ -58,6 +60,9 @@ export default {
     deleteTodo(todo) {
       this.$store.dispatch("deleteTodo", todo);
     },
+    editTodo(todo) {
+      this.$store.dispatch("editTodo", todo);
+    }
   },
   async created() {
     await this.loadTodos();
