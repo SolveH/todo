@@ -1,41 +1,22 @@
-# todo
+# Todo app project
 
-## Project setup
+This is John, Målfrid, Sølve and pull request master Marius's todo project.
 
-```
-npm install
-```
+## Technology
 
-### Compiles and hot-reloads for development
+Vue.js v2 has been used for developing the frontend.
+Spring Boot is used for developing the backend api.
 
-```
-npm run serve
-```
+## Install
 
-### Run a fake api using the db.json file
+### Frontend
 
-```
-npm run backend
-```
+All information is found in the readme in the web folder.
 
-### Run frontend and backend concurrently
+### Backend
 
-```
-npm run dev
-```
+To run the backend, install IntelliJ Ultimate and Maven and run install for the pom.xml file.
 
-### Compiles and minifies for production
+## Running the whole application
 
-```
-npm run build
-```
-
-### Lints and fixes files
-
-```
-npm run lint
-```
-
-### Customize configuration
-
-See [Configuration Reference](https://cli.vuejs.org/config/).
+Run the Spring Boot api in IntelliJ and npm serve for the frontend.
