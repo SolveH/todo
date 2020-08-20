@@ -44,7 +44,6 @@ const deleteTodo = async function(todo) {
 };
 const editTodo = async function(todo) {
   try {
-    console.log(todo);
     const res = await axios.put(`${apiUrl}/todo/${todo.id}`, todo);
     const editedTodo = parseItem(res, 200);
     return editedTodo;

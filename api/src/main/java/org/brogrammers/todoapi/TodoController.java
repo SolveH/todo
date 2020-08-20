@@ -31,7 +31,6 @@ public class TodoController {
 
     @PutMapping("/todo/{id}")
     public Todo editTodo(@PathVariable String id, @RequestBody Map<String, String> body){
-        System.out.println(body);
         String name = body.get("name");
         boolean isComplete = Boolean.getBoolean(body.get("complete"));
         return todoMockedData.updateTodo(id, name, isComplete);
