@@ -5,16 +5,10 @@
       :key="todo.id"
       :todo="todo"
       @deleteTodoById="deleteTodo"
+      @editTodoById="editTodo"
     />
-    <input
-      type="text"
-      name="todoText"
-      v-model="inputText"
-      v-on:keyup.enter="addTodo"
-    />
-    <md-button class="md-raised md-primary" @click="addTodo"
-      >Add todo</md-button
-    >
+    <input type="text" name="todoText" v-model="inputText" v-on:keyup.enter="addTodo"/>
+    <md-button class="md-raised md-primary" @click="addTodo">Add todo</md-button>
   </div>
 </template>
 
@@ -27,15 +21,15 @@ export default {
   computed: {
     todos() {
       return this.$store.getters.getTodos;
-    },
+    }
   },
   data() {
     return {
-      inputText: "",
+      inputText: ""
     };
   },
   components: {
-    TodoItem,
+    TodoItem
   },
   methods: {
     addTodo() {
@@ -44,7 +38,7 @@ export default {
         const newTodo = {
           id: randomId,
           name: this.inputText,
-          complete: false,
+          complete: false
         };
         this.$store.dispatch("addTodo", newTodo);
         this.inputText = "";
@@ -58,9 +52,12 @@ export default {
     deleteTodo(todo) {
       this.$store.dispatch("deleteTodo", todo);
     },
+    editTodo(todo) {
+      this.$store.dispatch("editTodo", todo);
+    }
   },
   async created() {
     await this.loadTodos();
-  },
+  }
 };
 </script>
