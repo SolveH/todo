@@ -1,8 +1,10 @@
 import * as axios from "axios";
 
-const getTodos = async function () {
+const apiUrl = "http://localhost:8888";
+
+const getTodos = async function() {
   try {
-    const res = await axios.get("http://localhost:8888/todos");
+    const res = await axios.get(`${apiUrl}/todo`);
     return parseList(res);
   } catch (e) {
     console.log(e);
@@ -10,9 +12,9 @@ const getTodos = async function () {
   }
 };
 
-const getTodo = async function (id) {
+const getTodo = async function(id) {
   try {
-    const res = await axios.get(`http://localhost:8888/todos/${id}`);
+    const res = await axios.get(`${apiUrl}/todo/${id}`);
     let todo = parseItem(res, 200);
     return todo;
   } catch (e) {
@@ -20,19 +22,19 @@ const getTodo = async function (id) {
     return null;
   }
 };
-const addTodo = async function (todo) {
+const addTodo = async function(todo) {
   try {
-    const res = await axios.post("http://localhost:8888/todos/", todo);
-    const addedTodo = parseItem(res, 201);
+    const res = await axios.post(`${apiUrl}/todo/`, todo);
+    const addedTodo = parseItem(res, 200);
     return addedTodo;
   } catch (e) {
     console.log(e);
     return null;
   }
 };
-const deleteTodo = async function (todo) {
+const deleteTodo = async function(todo) {
   try {
-    const res = await axios.delete(`http://localhost:8888/todos/${todo.id}`);
+    const res = await axios.delete(`${apiUrl}/todo/${todo.id}`);
     parseItem(res, 200);
     return todo.id;
   } catch (e) {
@@ -40,9 +42,9 @@ const deleteTodo = async function (todo) {
     return null;
   }
 };
-const editTodo = async function (todo) {
+const editTodo = async function(todo) {
   try {
-    const res = await axios.put(`http://localhost:8888/todos/${todo.id}`, todo);
+    const res = await axios.put(`${apiUrl}/todo/${todo.id}`, todo);
     const editedTodo = parseItem(res, 200);
     return editedTodo;
   } catch (e) {
