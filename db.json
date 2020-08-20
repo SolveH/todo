@@ -2,19 +2,19 @@
   "todos": [
     {
       "id": "21d6342e-b371-4366-9d8f-57a57d47ff5b",
-      "name": "ekko",
+      "name": "ekko 1",
       "editing": false,
       "complete": false
     },
     {
       "id": "6cb1d6d5-df75-4552-bfd6-f4f1f8a33f6c",
-      "name": "ekko2 ",
+      "name": "ekko 2",
       "editing": false,
       "complete": false
     },
     {
       "id": "183f0269-813e-4056-8dac-f10582dcb353",
-      "name": "tes t3",
+      "name": "test 3 edited",
       "editing": false,
       "complete": false
     }

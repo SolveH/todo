@@ -3,17 +3,17 @@
     <md-card>
       <md-card-header>
         <div class="md-title">
-          <div class="md-title" v-if="todo.editing">
+          <div class="md-title" v-if="editing">
             <input type="text" v-model="editInput" />
           </div>
           <div v-else>{{todo.name}}</div>
         </div>
       </md-card-header>
       <md-card-actions>
-        <div v-if="todo.editing">
+        <div v-if="editing">
           <md-button class="md-primary" @click="emitEditTodo">Save</md-button>
         </div>
-        <md-button @click="toggleEditing">Edit</md-button>
+        <md-button @click="editing = !editing">Edit</md-button>
         <md-button @click="emitDeleteTodo">Delete</md-button>
         <!-- <md-button>Edit</md-button> -->
         <!-- <md-checkbox>Complete</md-checkbox> -->
@@ -33,9 +33,15 @@ export default {
       default: () => {}
     }
   },
+  created() {
+    this.editInput = this.todo.name;
+    this.localTodo = cloneDeep(this.todo)
+  },
   data() {
     return {
-      editInput: ""
+      editInput: "",
+      editing: false,
+      localTodo: this.todo,
     };
   },
   computed: {
@@ -48,22 +54,19 @@ export default {
       this.$emit("deleteTodoById", this.todo);
     },
     toggleEditing() {
-      const todoCopy = cloneDeep(this.todo);
-      todoCopy.editing = !this.todo.editing;
+      this.editing = !this.editing;
 
-      if (todoCopy.editing == true) {
-        this.editInput = todoCopy.name;
+      if (this.editing == true) {
+        this.editInput = this.localTodo.name;
       }
 
-      this.$emit("toggleEditing", todoCopy);
+      this.$emit("toggleEditing", this.localTodo);
     },
     emitEditTodo() {
       if (this.editInput != "") {
-        const todoCopy = cloneDeep(this.todo);
-        todoCopy.name = this.editInput;
-        todoCopy.editing = false;
-
-        this.$emit("editTodoById", todoCopy);
+        this.localTodo.name = this.editInput;
+        this.editing = false;
+        this.$emit("editTodoById", this.localTodo);
       } else {
         alert("please enter a name");
       }

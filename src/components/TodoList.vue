@@ -39,7 +39,6 @@ export default {
         const newTodo = {
           id: randomId,
           name: this.inputText,
-          editing: false,
           complete: false
         };
         this.$store.dispatch("addTodo", newTodo);
