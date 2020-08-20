@@ -39,8 +39,10 @@ public class TodoMockedData {
     }
 
     public Todo updateTodo(String id, String name, boolean complete){
+        id = id.trim();
         for(Todo t: todos){
-            if(t.getId() == id){
+            String searchTodoId = t.getId().trim();
+            if(searchTodoId.equals(id)){
                 int index = todos.indexOf(t);
                 t.setName(name);
                 t.setComplete(complete);

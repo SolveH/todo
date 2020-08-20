@@ -31,6 +31,7 @@ public class TodoController {
 
     @PutMapping("/todo/{id}")
     public Todo editTodo(@PathVariable String id, @RequestBody Map<String, String> body){
+        System.out.println(body);
         String name = body.get("name");
         boolean isComplete = Boolean.getBoolean(body.get("complete"));
         return todoMockedData.updateTodo(id, name, isComplete);
@@ -38,7 +39,6 @@ public class TodoController {
 
     @DeleteMapping("/todo/{id}")
     public boolean delete(@PathVariable String id){
-        System.out.println(id);
         return todoMockedData.deleteTodo(id);
     }
 }
