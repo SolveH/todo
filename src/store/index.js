@@ -27,13 +27,6 @@ export default new Vuex.Store({
         ...state.todos.filter((todo) => todo.id !== removedTodoId),
       ];
     },
-    toggleEditing: (state, editTodo) => {
-      //editTodo.editing = !(editTodo.editing);
-
-      const index = state.todos.findIndex(t => t.id == editTodo.id);
-      state.todos.splice(index, 1, editTodo);
-      state.todos = [...state.todos];
-    },
     editTodo: (state, editTodo) => {
       const index = state.todos.findIndex(t => t.id == editTodo.id);
       state.todos.splice(index, 1, editTodo);
@@ -54,10 +47,6 @@ export default new Vuex.Store({
     async deleteTodo(context, todo) {
       const removedTodoId = await dataService.deleteTodo(todo);
       context.commit("deleteTodo", removedTodoId);
-    },
-    async toggleEditing(context, todo) {
-      const t = await dataService.toggleEditing(todo);
-      context.commit("toggleEditing", t);
     },
     async editTodo(context, todo) {
       const editedTodo = await dataService.editTodo(todo);

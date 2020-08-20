@@ -5,7 +5,6 @@
       :key="todo.id"
       :todo="todo"
       @deleteTodoById="deleteTodo"
-      @toggleEditing="toggleEditing"
       @editTodoById="editTodo"
     />
     <input type="text" name="todoText" v-model="inputText" v-on:keyup.enter="addTodo"/>
@@ -52,9 +51,6 @@ export default {
     },
     deleteTodo(todo) {
       this.$store.dispatch("deleteTodo", todo);
-    },
-    toggleEditing(todo) {
-      this.$store.dispatch("toggleEditing", todo);
     },
     editTodo(todo) {
       this.$store.dispatch("editTodo", todo);

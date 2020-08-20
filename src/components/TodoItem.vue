@@ -15,8 +15,6 @@
         </div>
         <md-button @click="editing = !editing">Edit</md-button>
         <md-button @click="emitDeleteTodo">Delete</md-button>
-        <!-- <md-button>Edit</md-button> -->
-        <!-- <md-checkbox>Complete</md-checkbox> -->
       </md-card-actions>
     </md-card>
   </div>
@@ -52,15 +50,6 @@ export default {
   methods: {
     emitDeleteTodo() {
       this.$emit("deleteTodoById", this.todo);
-    },
-    toggleEditing() {
-      this.editing = !this.editing;
-
-      if (this.editing == true) {
-        this.editInput = this.localTodo.name;
-      }
-
-      this.$emit("toggleEditing", this.localTodo);
     },
     emitEditTodo() {
       if (this.editInput != "") {
