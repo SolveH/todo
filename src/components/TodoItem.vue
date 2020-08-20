@@ -4,7 +4,7 @@
       <md-card-header>
         <div class="md-title">
           <div class="md-title" v-if="todo.editing">
-            <input type="text" id="todoTitle" v-model="editInput" />
+            <input type="text" v-model="editInput" />
           </div>
           <div v-else>{{todo.name}}</div>
         </div>
@@ -30,7 +30,6 @@ export default {
   props: {
     todo: {
       Object: String,
-      editing: Boolean,
       default: () => {}
     }
   },
@@ -39,12 +38,24 @@ export default {
       editInput: ""
     };
   },
+  computed: {
+    editInputComputed() {
+      return this.name;
+    }
+  },
   methods: {
     emitDeleteTodo() {
       this.$emit("deleteTodoById", this.todo);
     },
     toggleEditing() {
-      this.$emit("toggleEditing", this.todo);
+      const todoCopy = cloneDeep(this.todo);
+      todoCopy.editing = !this.todo.editing;
+
+      if (todoCopy.editing == true) {
+        this.editInput = todoCopy.name;
+      }
+
+      this.$emit("toggleEditing", todoCopy);
     },
     emitEditTodo() {
       if (this.editInput != "") {

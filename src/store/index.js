@@ -28,7 +28,7 @@ export default new Vuex.Store({
       ];
     },
     toggleEditing: (state, editTodo) => {
-      editTodo.editing = !(editTodo.editing);
+      //editTodo.editing = !(editTodo.editing);
 
       const index = state.todos.findIndex(t => t.id == editTodo.id);
       state.todos.splice(index, 1, editTodo);

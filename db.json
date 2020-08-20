@@ -2,13 +2,13 @@
   "todos": [
     {
       "id": "21d6342e-b371-4366-9d8f-57a57d47ff5b",
-      "name": "test 1",
-      "editing": true,
+      "name": "ekko",
+      "editing": false,
       "complete": false
     },
     {
       "id": "6cb1d6d5-df75-4552-bfd6-f4f1f8a33f6c",
-      "name": "test 2",
+      "name": "ekko2 ",
       "editing": false,
       "complete": false
     },

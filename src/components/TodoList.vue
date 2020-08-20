@@ -8,7 +8,7 @@
       @toggleEditing="toggleEditing"
       @editTodoById="editTodo"
     />
-    <input type="text" name="todoText" v-model="inputText" v-on:keyup.enter="addTodo" />
+    <input type="text" name="todoText" v-model="inputText" v-on:keyup.enter="addTodo"/>
     <md-button class="md-raised md-primary" @click="addTodo">Add todo</md-button>
   </div>
 </template>
