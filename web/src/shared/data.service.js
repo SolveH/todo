@@ -23,7 +23,7 @@ const getTodo = async function(id) {
 const addTodo = async function(todo) {
   try {
     const res = await axios.post("http://localhost:8888/todo/", todo);
-    const addedTodo = parseItem(res, 201);
+    const addedTodo = parseItem(res, 200);
     return addedTodo;
   } catch (e) {
     console.log(e);

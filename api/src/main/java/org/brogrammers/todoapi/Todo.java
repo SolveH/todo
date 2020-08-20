@@ -1,23 +1,23 @@
 package org.brogrammers.todoapi;
 
 public class Todo {
-    private int id;
+    private String id;
     private String name;
     private boolean complete;
 
     public Todo(){}
 
-    public Todo(int id, String name, boolean complete){
+    public Todo(String id, String name, boolean complete){
         this.setId(id);
         this.setName(name);
         this.setComplete(complete);
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

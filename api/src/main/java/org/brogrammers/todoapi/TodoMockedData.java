@@ -15,30 +15,30 @@ public class TodoMockedData {
 
     public TodoMockedData(){
         todos = new ArrayList<Todo>();
-        todos.add(new Todo(1, "Clean your room", false));
-        todos.add(new Todo(2, "Wash clothes", false));
-        todos.add(new Todo(3, "Do your todos", false));
-        todos.add(new Todo(4, "Fold your clothes", false));
+        todos.add(new Todo("1", "Clean your room", false));
+        todos.add(new Todo("2", "Wash clothes", false));
+        todos.add(new Todo("3", "Do your todos", false));
+        todos.add(new Todo("4", "Fold your clothes", false));
     }
 
     public List<Todo> fetchTodos(){
         return todos;
     }
 
-    public Todo getTodoById(int id){
+    public Todo getTodoById(String id){
         for(Todo t: todos){
             if(t.getId() == id) return t;
         }
         return null;
     }
 
-    public Todo addTodo(int id, String name, boolean complete){
+    public Todo addTodo(String id, String name, boolean complete){
         Todo newTodo = new Todo(id, name, complete);
         todos.add(newTodo);
         return newTodo;
     }
 
-    public Todo updateTodo(int id, String name, boolean complete){
+    public Todo updateTodo(String id, String name, boolean complete){
         for(Todo t: todos){
             if(t.getId() == id){
                 int index = todos.indexOf(t);
@@ -51,10 +51,12 @@ public class TodoMockedData {
         return null;
     }
 
-    public boolean deleteTodo(int id){
+    public boolean deleteTodo(String id){
+        id = id.trim();
         int index = -1;
         for(Todo t: todos) {
-            if(t.getId() == id) {
+            String newTodoId = t.getId().trim();
+            if(newTodoId.equals(id)) {
                 index = todos.indexOf(t);
                 continue;
             }
