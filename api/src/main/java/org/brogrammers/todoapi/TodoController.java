@@ -1,5 +1,7 @@
 package org.brogrammers.todoapi;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -12,8 +14,8 @@ public class TodoController {
     TodoMockedData todoMockedData = TodoMockedData.getInstance();
 
     @GetMapping("/todo")
-    public List<Todo> index(){
-        return todoMockedData.fetchTodos();
+    public ResponseEntity<List<Todo>> index(){
+        return new ResponseEntity(todoMockedData.fetchTodos(), HttpStatus.OK);
     }
 
     @GetMapping("/todo/{id}")
