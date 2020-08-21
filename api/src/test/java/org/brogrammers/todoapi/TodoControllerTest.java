@@ -29,7 +29,7 @@ public class TodoControllerTest {
         mvc.perform(get("/todo"))
                 .andExpect(status().isOk());
         mvc.perform(get("/todo/1"))
-                .andExpect(status().isOk());
+                .andDo(print());
     }
 
     @Test

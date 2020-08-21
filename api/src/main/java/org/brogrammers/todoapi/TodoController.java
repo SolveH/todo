@@ -15,12 +15,13 @@ public class TodoController {
 
     @GetMapping("/todo")
     public ResponseEntity<List<Todo>> index(){
-        return new ResponseEntity(todoMockedData.fetchTodos(), HttpStatus.OK);
+        return new ResponseEntity<>(todoMockedData.fetchTodos(), HttpStatus.OK);
     }
 
     @GetMapping("/todo/{id}")
     public ResponseEntity<Todo> show(@PathVariable String id){
-        return new ResponseEntity(todoMockedData.getTodoById(id), HttpStatus.OK);
+        return new ResponseEntity<>(todoMockedData.getTodoById(id), HttpStatus.OK);
+        //return ResponseEntity.ok().body(todoMockedData.getTodoById(id));
     }
 
     @PostMapping("/todo")
@@ -28,14 +29,14 @@ public class TodoController {
         String id = body.get("id");
         String name = body.get("name");
         boolean isComplete = Boolean.getBoolean(body.get("complete"));
-        return new ResponseEntity(todoMockedData.addTodo(id, name, isComplete), HttpStatus.CREATED);
+        return new ResponseEntity<>(todoMockedData.addTodo(id, name, isComplete), HttpStatus.CREATED);
     }
 
     @PutMapping("/todo/{id}")
     public ResponseEntity<Todo> editTodo(@PathVariable String id, @RequestBody Map<String, String> body){
         String name = body.get("name");
         boolean isComplete = Boolean.getBoolean(body.get("complete"));
-        return new ResponseEntity(todoMockedData.updateTodo(id, name, isComplete), HttpStatus.OK);
+        return new ResponseEntity<>(todoMockedData.updateTodo(id, name, isComplete), HttpStatus.OK);
     }
 
     @DeleteMapping("/todo/{id}")
