@@ -26,7 +26,7 @@ public class TodoControllerTest {
     @Autowired
     MockMvc mvc;
 
-    @Test
+    @Test // GET
     void whenGetTodos_thenReturnHTTPStatusOK() throws Exception {
         mvc.perform(get("/todo"))
                 .andExpect(status().isOk());
@@ -34,7 +34,7 @@ public class TodoControllerTest {
                 .andExpect(status().isOk());
     }
 
-    @Test
+    @Test // CREATE
     void whenCreateTodo_thenReturnTodoAndHTTPStatusCreated() throws Exception {
         // make
         Todo todo = new Todo("45", "This is a todo", false);
@@ -43,12 +43,18 @@ public class TodoControllerTest {
                 .andExpect(status().isCreated());
     }
 
-    // PUT
+    @Test // PUT
+    void whenUpdateTodo_ThenReturnHTTPStatusOk() throws Exception {
+        Todo todo = new Todo("1", "The todo is updated", false);
+        mvc.perform(put("/todo/1", todo))
+            .andExpect(status().isOk());
+    }
 
-    // DELETE
-    @Test
+
+    @Test // DEL
     void whenDeleteTodo_thenReturnHTTPStatusOk() throws Exception {
-        mvc.perform(delete("/todo/1"));
+        mvc.perform(delete("/todo/1"))
+            .andExpect(status().isOk());
     }
 
 }

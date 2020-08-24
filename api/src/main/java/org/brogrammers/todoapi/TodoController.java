@@ -21,7 +21,6 @@ public class TodoController {
     @GetMapping("/todo/{id}")
     public ResponseEntity<Todo> show(@PathVariable String id){
         return new ResponseEntity<>(todoMockedData.getTodoById(id), HttpStatus.OK);
-        //return ResponseEntity.ok().body(todoMockedData.getTodoById(id));
     }
 
     @PostMapping("/todo")
