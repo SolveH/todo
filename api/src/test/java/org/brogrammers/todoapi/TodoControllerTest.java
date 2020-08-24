@@ -8,6 +8,8 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -29,16 +31,24 @@ public class TodoControllerTest {
         mvc.perform(get("/todo"))
                 .andExpect(status().isOk());
         mvc.perform(get("/todo/1"))
-                .andDo(print());
+                .andExpect(status().isOk());
     }
 
     @Test
     void whenCreateTodo_thenReturnTodoAndHTTPStatusCreated() throws Exception {
         // make
-        Todo todo = new Todo("gjfds", "This is a todo", false);
+        Todo todo = new Todo("45", "This is a todo", false);
         // put
-        mvc.perform(put("/todo/", todo))
+        mvc.perform(post("/todo", todo))
                 .andExpect(status().isCreated());
+    }
+
+    // PUT
+
+    // DELETE
+    @Test
+    void whenDeleteTodo_thenReturnHTTPStatusOk() throws Exception {
+        mvc.perform(delete("/todo/1"));
     }
 
 }
