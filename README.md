@@ -28,10 +28,13 @@ npm serve
 
 # Running with docker
 Download the Docker Desktop application and go to the root folder in your favorite terminal and run
+
+## For building and running first time
+Add the "-d" flag to run in detatched mode
 ```
-docker-compose build
+docker-compose up --build
 ```
-and then run
+if you have already built it, run it with
 ```
-docker-compose up -d
+docker-compose up
 ```
