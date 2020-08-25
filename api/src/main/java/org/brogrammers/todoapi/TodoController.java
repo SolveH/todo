@@ -33,7 +33,6 @@ public class TodoController {
 
     @PostMapping("/todo")
     public ResponseEntity<Todo> create(@RequestBody Map<String, String> body){
-        //String id = body.get("id");
         String name = body.get("name");
         boolean isComplete = Boolean.getBoolean(body.get("complete"));
         Todo todo = new Todo(name, isComplete);
