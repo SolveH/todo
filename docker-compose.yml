@@ -2,6 +2,12 @@ version: "3.7"
 
 services: 
     web:
+        image: vuejstodoapp-docker-compose-app:1
         build: web
         ports: 
             - 8080:80
+    api:
+        image: springboot-docker-compose-app:1
+        build: api
+        ports:
+            - 8888:8888
