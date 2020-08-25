@@ -11,3 +11,13 @@ services:
         build: api
         ports:
             - 8888:8888
+        depends_on: 
+            - dbpostgresql
+    dbpostgresql:
+        image: postgres
+        ports: 
+            - 5432:5432
+        environment: 
+            - POSTGRES_PASSWORD=password
+            - POSTGRES_USER=postgres
+            - POSTGRES_DB=mydb
