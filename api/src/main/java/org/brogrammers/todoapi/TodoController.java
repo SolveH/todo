@@ -13,7 +13,7 @@ import java.util.Map;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TodoController {
 
-    @Autowired
+
     private TodoRepository todoRepository;
 
     @Autowired
