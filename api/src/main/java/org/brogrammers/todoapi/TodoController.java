@@ -43,7 +43,7 @@ public class TodoController {
     public ResponseEntity<Todo> editTodo(@PathVariable String id, @RequestBody Map<String, String> body){
         Todo todoToUpdate = todoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         String name = body.get("name");
-        boolean isComplete = Boolean.getBoolean(body.get("complete"));
+        boolean isComplete = Boolean.parseBoolean(body.get("complete"));
         todoToUpdate.setName(name);
         todoToUpdate.setComplete(isComplete);
         return new ResponseEntity<>(todoRepository.save(todoToUpdate), HttpStatus.OK);
