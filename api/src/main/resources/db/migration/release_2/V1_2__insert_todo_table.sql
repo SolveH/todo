@@ -4,4 +4,4 @@ VALUES
        (DEFAULT, 'Feed your squirrel', DEFAULT),
        (DEFAULT, 'Drink Coca-Cola', DEFAULT),
        (DEFAULT, 'Work out', DEFAULT),
-       (DEFAULT, 'Pet the dog', DEFAULT);
+       (DEFAULT, 'Pet the hedgehog', DEFAULT);
