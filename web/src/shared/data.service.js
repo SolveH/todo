@@ -1,8 +1,9 @@
 import * as axios from "axios";
 
-const apiUrl = "http://localhost:8888";
+const apiUrl = process.env.VUE_APP_APIURL;
 
 const getTodos = async function () {
+  console.log(process.env.NODE_ENV);
   try {
     const res = await axios.get(`${apiUrl}/todo`);
     return parseList(res);
