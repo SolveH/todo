@@ -10,7 +10,7 @@ import java.util.UUID;
 public class Todo {
     @Id @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid",
-            strategy = "uuid")
+            strategy = "uuid2")
     private UUID id;
     private String name;
     private boolean complete;
