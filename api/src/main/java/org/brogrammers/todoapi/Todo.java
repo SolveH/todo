@@ -1,11 +1,16 @@
 package org.brogrammers.todoapi;
 
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
 public class Todo {
-    @Id @GeneratedValue (strategy = GenerationType.AUTO)
+    @Id @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid",
+            strategy = "uuid")
     private UUID id;
     private String name;
     private boolean complete;
