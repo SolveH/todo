@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TodoMockedData {
-
+    /*
     private List<Todo> todos;
 
     private static TodoMockedData instance = null;
@@ -68,5 +68,5 @@ public class TodoMockedData {
         }
         return true;
 
-    }
+    }*/
 }

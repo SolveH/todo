@@ -6,9 +6,7 @@
           <div class="md-title" v-if="editing">
             <input type="text" v-model="editInput" />
           </div>
-          <div v-else v-bind:class="{ completeText: checked }">
-            {{ todo.name }}
-          </div>
+          <div v-else v-bind:class="{ completeText: checked }">{{ todo.name }}</div>
           <md-checkbox
             type="checkbox"
             id="checkbox"

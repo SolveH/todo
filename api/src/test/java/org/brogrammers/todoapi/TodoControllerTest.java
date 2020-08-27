@@ -16,7 +16,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest
 @AutoConfigureMockMvc
 public class TodoControllerTest {
-
+/*
     @Autowired
     TodoController controller;
 
@@ -25,7 +25,7 @@ public class TodoControllerTest {
 
     @Autowired
     MockMvc mvc;
-/*
+
     @Test // GET
     void whenGetTodos_thenReturnHTTPStatusOK() throws Exception {
         mvc.perform(get("/todo"))

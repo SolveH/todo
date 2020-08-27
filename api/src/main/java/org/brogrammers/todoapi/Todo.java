@@ -1,16 +1,17 @@
 package org.brogrammers.todoapi;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.UUID;
 
 @Entity
 public class Todo {
-    @Id @GeneratedValue (generator = "system-uuid")
-    @GenericGenerator(name="system-uuid", strategy = "uuid")
-    private String id;
+    @Id @GeneratedValue(generator="system-uuid")
+    @GenericGenerator(name="system-uuid",
+            strategy = "uuid2")
+    private UUID id;
     private String name;
     private boolean complete;
 
@@ -23,17 +24,17 @@ public class Todo {
         this.setComplete(complete);
     }
 
-    public Todo(String id, String name, boolean complete){
+    public Todo(UUID id, String name, boolean complete){
         this.setId(id);
         this.setName(name);
         this.setComplete(complete);
     }
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 

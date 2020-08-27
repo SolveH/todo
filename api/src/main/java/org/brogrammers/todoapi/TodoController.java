@@ -8,6 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -28,7 +29,8 @@ public class TodoController {
 
     @GetMapping("/todo/{id}")
     public ResponseEntity<Todo> show(@PathVariable String id){
-        return new ResponseEntity<>(todoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)), HttpStatus.OK);
+        UUID uuid = UUID.fromString(id);
+        return new ResponseEntity<>(todoRepository.findById(uuid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)), HttpStatus.OK);
     }
 
     @PostMapping("/todo")
@@ -41,7 +43,8 @@ public class TodoController {
 
     @PutMapping("/todo/{id}")
     public ResponseEntity<Todo> editTodo(@PathVariable String id, @RequestBody Map<String, String> body){
-        Todo todoToUpdate = todoRepository.findById(id).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
+        UUID uuid = UUID.fromString(id);
+        Todo todoToUpdate = todoRepository.findById(uuid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
         String name = body.get("name");
         boolean isComplete = Boolean.parseBoolean(body.get("complete"));
         todoToUpdate.setName(name);
@@ -52,7 +55,8 @@ public class TodoController {
     @DeleteMapping("/todo/{id}")
     public ResponseEntity<Todo> delete(@PathVariable String id){
         try{
-            todoRepository.deleteById(id);
+            UUID uuid = UUID.fromString(id);
+            todoRepository.deleteById(uuid);
             return new ResponseEntity(HttpStatus.OK);
         }catch (IllegalArgumentException e){
             System.out.println(e);
