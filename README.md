@@ -1,40 +1,38 @@
-# Todo app project
+# Netcompany todo app project
 
 This is John, Målfrid, Sølve and pull request master Marius's todo project.
 
 ## Technology
 
-Vue.js v2 has been used for developing the frontend.
-Spring Boot is used for developing the backend api.
+- **Frontend**
+  - Vue.js v2
+  - Vue Material
+- **Backend**
+  - Spring Boot REST API
+  - Docker-compose
+  - Swagger API documentation
+  - Flyway database migration
+- **Database**
+  - PostgreSQL
+
+## Project setup using Docker
+
+If you want to simply run and try the application, download [Docker Desktop](https://www.docker.com/products/docker-desktop). In the root folder of the application, run this command:
+
+```
+docker-compose up --build -d
+```
+
+This command will build and run the Vue and Spring Boot applications within separate containers on the same network and set up a PostgreSQL database within another container.
 
 ## Install
 
 ### Frontend
 
-All information is found in the readme in the web folder.
+To run the Vue.js application with hot-reloading for development, check out the details in the README.md in the web folder.
 
 ### Backend
 
-To run the backend, install IntelliJ Ultimate and Maven and run install for the pom.xml file and then run the TodoApiApplication file in IntelliJ.
+To run the Spring Boot API on your PC locally instead of inside a docker container, do the instructions in the README.md in the api folder.
 
-Documentation is found at [http://localhost:8888/swagger-ui.html] http://localhost:8888/swagger-ui.html
-
-## Running the whole application
-
-Run the Spring Boot api in IntelliJ and to run frontend do
-```
-npm serve
-```
-
-# Running with docker
-Download the Docker Desktop application and go to the root folder in your favorite terminal and run
-
-## For building and running first time
-Add the "-d" flag to run in detatched mode
-```
-docker-compose up --build
-```
-if you have already built it, run it with
-```
-docker-compose up
-```
+API documentation is found at http://localhost:8888/swagger-ui.html
