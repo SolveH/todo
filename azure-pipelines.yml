@@ -20,3 +20,8 @@ steps:
     npm run build
   workingDirectory: web
   displayName: 'npm install and build'
+- task: PublishBuildArtifacts@1
+  inputs:
+    PathtoPublish: 'dist'
+    ArtifactName: 'dist'
+    publishLocation: 'Container'
