@@ -16,7 +16,7 @@ steps:
   displayName: 'Install Node.js'
 
 - script: |
-    workingDirectory: web
     npm install
     npm run build
+  workingDirectory: web
   displayName: 'npm install and build'
