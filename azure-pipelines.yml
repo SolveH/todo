@@ -23,7 +23,5 @@ steps:
 
 - task: PublishBuildArtifacts@1
   inputs:
-    PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-    ArtifactName: 'dist'
-    publishLocation: 'FilePath'
-    TargetPath: 'dist'
+    artifactName: dist
+    pathtoPublish: 'dist'
