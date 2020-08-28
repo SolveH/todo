@@ -1,6 +1,11 @@
 import * as axios from "axios";
 
-const apiUrl = process.env.VUE_APP_APIURL;
+//const apiUrl = process.env.VUE_APP_APIURL;
+const apiUrl = "";
+
+const port = 8888;
+axios.defaults.baseURL =
+  location.protocol + "//" + location.hostname + ":" + port;
 
 const getTodos = async function () {
   console.log(process.env.NODE_ENV);
