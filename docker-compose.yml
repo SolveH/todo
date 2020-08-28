@@ -7,8 +7,8 @@ services:
     ports:
       - 8080:80
     depends_on:
-      - rest_api
-  rest_api:
+      - api
+  api:
     image: springboot-docker-compose-app:1
     build: api
     ports:
