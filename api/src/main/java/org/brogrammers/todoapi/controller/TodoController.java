@@ -1,5 +1,7 @@
-package org.brogrammers.todoapi;
+package org.brogrammers.todoapi.controller;
 
+import org.brogrammers.todoapi.model.Todo;
+import org.brogrammers.todoapi.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,7 +15,6 @@ import java.util.UUID;
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TodoController {
-
 
     private TodoRepository todoRepository;
 

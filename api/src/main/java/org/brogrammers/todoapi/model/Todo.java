@@ -1,4 +1,4 @@
-package org.brogrammers.todoapi;
+package org.brogrammers.todoapi.model;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
