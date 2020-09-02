@@ -3,6 +3,7 @@ package org.brogrammers.todoapi.model;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -11,6 +12,7 @@ import java.util.UUID;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
+@ToString
 public class Todo {
     @Id @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid",
@@ -28,14 +30,5 @@ public class Todo {
         this.id = id;
         this.name = name;
         this.complete = complete;
-    }
-
-    @Override
-    public String toString() {
-        return "{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", complete='" + complete + '\'' +
-                '}';
     }
 }
