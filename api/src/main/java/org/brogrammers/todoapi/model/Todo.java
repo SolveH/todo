@@ -1,9 +1,6 @@
 package org.brogrammers.todoapi.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -11,8 +8,7 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Getter @Setter @NoArgsConstructor
-@ToString
+@Data //this annotation includes @Getter, @Setter, @ToString, @NoArgConstructor and @EqualsAndHashCode
 public class Todo {
     @Id @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid",

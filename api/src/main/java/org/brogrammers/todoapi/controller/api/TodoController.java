@@ -1,4 +1,4 @@
-package org.brogrammers.todoapi.controller;
+package org.brogrammers.todoapi.controller.api;
 
 import org.brogrammers.todoapi.model.Todo;
 import org.brogrammers.todoapi.repository.TodoRepository;
