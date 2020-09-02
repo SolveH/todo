@@ -2,6 +2,7 @@ package org.brogrammers.todoapi.controller.api;
 
 import org.brogrammers.todoapi.model.Todo;
 import org.brogrammers.todoapi.repository.TodoRepository;
+import org.brogrammers.todoapi.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,13 +20,16 @@ public class TodoController {
     private TodoRepository todoRepository;
 
     @Autowired
+    private TodoService todoService;
+
+    @Autowired
     public TodoController(TodoRepository todoRepository){
         this.todoRepository = todoRepository;
     }
 
     @GetMapping("/todo")
     public ResponseEntity<List<Todo>> index(){
-        return new ResponseEntity<>(todoRepository.findAll(), HttpStatus.OK);
+        return new ResponseEntity<>(todoService.getAllTodos(), HttpStatus.OK);
     }
 
     @GetMapping("/todo/{id}")
