@@ -1,5 +1,8 @@
 package org.brogrammers.todoapi.model;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
@@ -7,6 +10,7 @@ import javax.persistence.*;
 import java.util.UUID;
 
 @Entity
+@Getter @Setter @NoArgsConstructor
 public class Todo {
     @Id @GeneratedValue(generator="system-uuid")
     @GenericGenerator(name="system-uuid",
@@ -15,42 +19,14 @@ public class Todo {
     private String name;
     private boolean complete;
 
-    public Todo() {
-
-    }
-
     public Todo(String name, boolean complete){
-        this.setName(name);
-        this.setComplete(complete);
+        this.name = name;
+        this.complete = complete;
     }
 
     public Todo(UUID id, String name, boolean complete){
-        this.setId(id);
-        this.setName(name);
-        this.setComplete(complete);
-    }
-
-    public UUID getId() {
-        return id;
-    }
-
-    public void setId(UUID id) {
         this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
         this.name = name;
-    }
-
-    public boolean isComplete() {
-        return complete;
-    }
-
-    public void setComplete(boolean complete) {
         this.complete = complete;
     }
 
@@ -62,6 +38,4 @@ public class Todo {
                 ", complete='" + complete + '\'' +
                 '}';
     }
-
-
 }
