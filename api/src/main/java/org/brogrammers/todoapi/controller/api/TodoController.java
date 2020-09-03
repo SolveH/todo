@@ -1,5 +1,6 @@
 package org.brogrammers.todoapi.controller.api;
 
+import org.brogrammers.todoapi.exception.TodoNotFoundException;
 import org.brogrammers.todoapi.model.Todo;
 import org.brogrammers.todoapi.repository.TodoRepository;
 import org.brogrammers.todoapi.service.TodoService;
@@ -34,49 +35,44 @@ public class TodoController {
 
     @GetMapping("/todo/{id}")
     public ResponseEntity<Todo> show(@PathVariable String id){
-        UUID uuid;
         try{
-            uuid = UUID.fromString(id);
-        }catch(IllegalArgumentException e){
-            System.out.println(e);
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        Todo todo = todoService.getTodoById(uuid);
-        if(todo != null){
+            Todo todo = todoService.getTodoById(id);
             return new ResponseEntity<>(todo, HttpStatus.OK);
-        }else {
+        }catch(IllegalArgumentException | TodoNotFoundException e){
+            System.out.println(e);
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
     @PostMapping("/todo")
     public ResponseEntity<Todo> create(@RequestBody Map<String, String> body){
-        Todo todo = todoService.addNewTodo(body.get("name"), Boolean.getBoolean(body.get("complete")));
+        String name = body.get("name");
+        Boolean complete = Boolean.getBoolean(body.get("complete"));
+        Todo todo = todoService.addNewTodo(name, complete);
         return new ResponseEntity<>(todo, HttpStatus.CREATED);
     }
 
     @PutMapping("/todo/{id}")
     public ResponseEntity<Todo> editTodo(@PathVariable String id, @RequestBody Map<String, String> body){
-        UUID uuid = UUID.fromString(id);
-        Todo todoToUpdate = todoRepository.findById(uuid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
-        String name = body.get("name");
-        boolean isComplete = Boolean.parseBoolean(body.get("complete"));
-        todoToUpdate.setName(name);
-        todoToUpdate.setComplete(isComplete);
-        return new ResponseEntity<>(todoRepository.save(todoToUpdate), HttpStatus.OK);
+        String newName = body.get("name");
+        Boolean newComplete = Boolean.parseBoolean(body.get("complete"));
+        try{
+            Todo todo = todoService.updateTodo(id, newName, newComplete);
+            return new ResponseEntity<>(todo, HttpStatus.OK);
+        }catch(IllegalArgumentException | TodoNotFoundException e){
+            System.out.println(e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @DeleteMapping("/todo/{id}")
     public ResponseEntity<Todo> delete(@PathVariable String id){
         try{
-            UUID uuid = UUID.fromString(id);
-            todoRepository.deleteById(uuid);
+            todoService.deleteTodo(id);
             return new ResponseEntity(HttpStatus.OK);
-        }catch (IllegalArgumentException e){
+        }catch (IllegalArgumentException | TodoNotFoundException e){
             System.out.println(e);
-            System.out.println("The todo does not exist");
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-
     }
 }

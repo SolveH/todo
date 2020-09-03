@@ -1,8 +1,11 @@
 package org.brogrammers.todoapi.service;
 
+import org.brogrammers.todoapi.exception.TodoNotFoundException;
 import org.brogrammers.todoapi.model.Todo;
 import org.brogrammers.todoapi.repository.TodoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -19,18 +22,25 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public Todo getTodoById(UUID id) {
-        return todoRepository.findById(id).orElse(null);
+    public Todo getTodoById(String id) throws TodoNotFoundException, IllegalArgumentException {
+        UUID uuid = UUID.fromString(id);
+        return todoRepository.findById(uuid).orElseThrow(() -> new TodoNotFoundException("Could not fint todo with ID: " + id));
     }
 
     @Override
-    public Todo updateTodo(Todo todo) {
-        return null;
+    public Todo updateTodo(String id, String newName, Boolean newComplete) throws TodoNotFoundException, IllegalArgumentException {
+        Todo todoToUpdate = getTodoById(id);
+        todoToUpdate.setName(newName);
+        todoToUpdate.setComplete(newComplete);
+        return todoRepository.save(todoToUpdate);
     }
 
     @Override
-    public Todo deleteTodo(UUID id) {
-        return null;
+    public void deleteTodo(String id) throws TodoNotFoundException, IllegalArgumentException {
+        UUID uuid = UUID.fromString(id);
+        //If the function does not throw exception, the todo exists
+        getTodoById(id);
+        todoRepository.deleteById(uuid);
     }
 
     @Override
