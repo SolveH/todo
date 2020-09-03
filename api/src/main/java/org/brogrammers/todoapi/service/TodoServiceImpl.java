@@ -24,7 +24,7 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public Todo getTodoById(String id) throws TodoNotFoundException, IllegalArgumentException {
         UUID uuid = UUID.fromString(id);
-        return todoRepository.findById(uuid).orElseThrow(() -> new TodoNotFoundException("Could not fint todo with ID: " + id));
+        return todoRepository.findById(uuid).orElseThrow(() -> new TodoNotFoundException("Could not find todo with ID: " + id));
     }
 
     @Override
@@ -38,9 +38,12 @@ public class TodoServiceImpl implements TodoService {
     @Override
     public void deleteTodo(String id) throws TodoNotFoundException, IllegalArgumentException {
         UUID uuid = UUID.fromString(id);
-        //If the function does not throw exception, the todo exists
-        getTodoById(id);
-        todoRepository.deleteById(uuid);
+        if(todoRepository.existsById(uuid)){
+            todoRepository.deleteById(uuid);
+        }else{
+            throw new TodoNotFoundException("Could not find todo with ID: " + id);
+        }
+
     }
 
     @Override
