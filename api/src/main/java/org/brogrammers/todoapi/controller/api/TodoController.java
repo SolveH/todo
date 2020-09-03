@@ -51,10 +51,8 @@ public class TodoController {
 
     @PostMapping("/todo")
     public ResponseEntity<Todo> create(@RequestBody Map<String, String> body){
-        String name = body.get("name");
-        boolean isComplete = Boolean.getBoolean(body.get("complete"));
-        Todo todo = new Todo(name, isComplete);
-        return new ResponseEntity<>(todoRepository.save(todo), HttpStatus.CREATED);
+        Todo todo = todoService.addNewTodo(body.get("name"), Boolean.getBoolean(body.get("complete")));
+        return new ResponseEntity<>(todo, HttpStatus.CREATED);
     }
 
     @PutMapping("/todo/{id}")
