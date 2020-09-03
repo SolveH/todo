@@ -18,15 +18,8 @@ import java.util.UUID;
 @CrossOrigin(origins = "*", allowedHeaders = "*")
 public class TodoController {
 
-    private TodoRepository todoRepository;
-
     @Autowired
     private TodoService todoService;
-
-    @Autowired
-    public TodoController(TodoRepository todoRepository){
-        this.todoRepository = todoRepository;
-    }
 
     @GetMapping("/todo")
     public ResponseEntity<List<Todo>> index(){
