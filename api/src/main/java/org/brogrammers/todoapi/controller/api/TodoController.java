@@ -34,8 +34,19 @@ public class TodoController {
 
     @GetMapping("/todo/{id}")
     public ResponseEntity<Todo> show(@PathVariable String id){
-        UUID uuid = UUID.fromString(id);
-        return new ResponseEntity<>(todoRepository.findById(uuid).orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND)), HttpStatus.OK);
+        UUID uuid;
+        try{
+            uuid = UUID.fromString(id);
+        }catch(IllegalArgumentException e){
+            System.out.println(e);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        Todo todo = todoService.getTodoById(uuid);
+        if(todo != null){
+            return new ResponseEntity<>(todo, HttpStatus.OK);
+        }else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 
     @PostMapping("/todo")

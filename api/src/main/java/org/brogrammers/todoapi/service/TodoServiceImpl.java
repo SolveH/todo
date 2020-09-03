@@ -19,6 +19,11 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
+    public Todo getTodoById(UUID id) {
+        return todoRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public Todo updateTodo(Todo todo) {
         return null;
     }
