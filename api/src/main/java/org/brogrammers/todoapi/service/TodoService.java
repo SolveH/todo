@@ -11,5 +11,5 @@ public interface TodoService {
     Todo getTodoById(String id) throws TodoNotFoundException, IllegalArgumentException;
     Todo updateTodo(String id, String newName, Boolean newComplete) throws TodoNotFoundException, IllegalArgumentException;
     void deleteTodo(String id) throws TodoNotFoundException, IllegalArgumentException;
-    Todo addNewTodo(String name, boolean complete);
+    Todo addTodo(String name, boolean complete);
 }
