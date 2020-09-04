@@ -1,60 +1,52 @@
 package org.brogrammers.todoapi;
 
-import org.junit.jupiter.api.Test;
+import org.brogrammers.todoapi.controller.api.TodoController;
+import org.brogrammers.todoapi.model.Todo;
+import org.brogrammers.todoapi.service.TodoService;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mockito;
+import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.RequestBuilder;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-@SpringBootTest
-@AutoConfigureMockMvc
+import java.util.UUID;
+//https://www.springboottutorial.com/unit-testing-for-spring-boot-rest-services
+@RunWith(SpringRunner.class)
+@WebMvcTest(value = TodoController.class)
 public class TodoControllerTest {
-/*
     @Autowired
-    TodoController controller;
+    private MockMvc mockMvc;
 
-    @Autowired
-    TodoApiApplication wac;
+    @MockBean
+    private TodoService todoService;
 
-    @Autowired
-    MockMvc mvc;
-
-    @Test // GET
-    void whenGetTodos_thenReturnHTTPStatusOK() throws Exception {
-        mvc.perform(get("/todo"))
-                .andExpect(status().isOk());
-        mvc.perform(get("/todo/1"))
-                .andExpect(status().isOk());
-    }
-
-    @Test // CREATE
-    void whenCreateTodo_thenReturnTodoAndHTTPStatusCreated() throws Exception {
-        // make
-        Todo todo = new Todo("45", "This is a todo", false);
-        // put
-        mvc.perform(post("/todo", todo))
-                .andExpect(status().isCreated());
-    }
-
-    @Test // PUT
-    void whenUpdateTodo_ThenReturnHTTPStatusOk() throws Exception {
-        Todo todo = new Todo("1", "The todo is updated", false);
-        mvc.perform(put("/todo/1", todo))
-            .andExpect(status().isOk());
+    @Before
+    public void init() throws Exception{
+        UUID uuid = UUID.fromString("90411126-ede5-11ea-adc1-0242ac120002");
+        Todo todo = new Todo(uuid, "Drink", false);
+        String jsonExample = "{\"id\":\"90411126-ede5-11ea-adc1-0242ac120002\",\"name\":\"Drink\",\"complete\":true}";
+        Mockito.when(todoService.getTodoById("90411126-ede5-11ea-adc1-0242ac120002")).thenReturn(todo);
     }
 
 
-    @Test // DEL
-    void whenDeleteTodo_thenReturnHTTPStatusOk() throws Exception {
-        mvc.perform(delete("/todo/1"))
-            .andExpect(status().isOk());
-    }*/
+    @Test
+    public void getTodoById() throws Exception{
+        RequestBuilder requestBuilder = MockMvcRequestBuilders.get("/todo/90411126-ede5-11ea-adc1-0242ac120002").accept(MediaType.APPLICATION_JSON);
 
+        MvcResult result = mockMvc.perform(requestBuilder).andReturn();
+
+        System.out.println(result.getResponse());
+        String expected = "{id:90411126-ede5-11ea-adc1-0242ac120002,name:Drink,complete:false}";
+
+        JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false);
+    }
 }

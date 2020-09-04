@@ -47,7 +47,7 @@ public class TodoServiceImpl implements TodoService {
     }
 
     @Override
-    public Todo addNewTodo(String name, boolean complete) {
+    public Todo addTodo(String name, boolean complete) {
         Todo todo = new Todo(name, complete);
         return todoRepository.save(todo);
     }

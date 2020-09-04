@@ -2,17 +2,14 @@ package org.brogrammers.todoapi.controller.api;
 
 import org.brogrammers.todoapi.exception.TodoNotFoundException;
 import org.brogrammers.todoapi.model.Todo;
-import org.brogrammers.todoapi.repository.TodoRepository;
 import org.brogrammers.todoapi.service.TodoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @RestController
 @CrossOrigin(origins = "*", allowedHeaders = "*")
@@ -41,7 +38,10 @@ public class TodoController {
     public ResponseEntity<Todo> create(@RequestBody Map<String, String> body){
         String name = body.get("name");
         Boolean complete = Boolean.getBoolean(body.get("complete"));
-        Todo todo = todoService.addNewTodo(name, complete);
+        Todo todo = todoService.addTodo(name, complete);
+        if(todo == null){
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
         return new ResponseEntity<>(todo, HttpStatus.CREATED);
     }
 
