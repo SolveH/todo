@@ -1,11 +1,13 @@
 pipeline {
-    agent { docker { image 'node:latest' } }
+    agent { 
+        dockerfile { 
+            dir 'web'
+        } 
+    }
     stages {
         stage('build') {
             steps {
-                sh 'cd web'
-                sh 'npm install'
-                sh 'npm run build'
+                echo 'things should be fine by now'
             }
         }
     }
