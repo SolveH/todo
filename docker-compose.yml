@@ -5,7 +5,7 @@ services:
     image: vuejstodoapp-docker-compose-app:1
     build: web
     ports:
-      - 8080:80
+      - 8088:80
     depends_on:
       - api
   api:
